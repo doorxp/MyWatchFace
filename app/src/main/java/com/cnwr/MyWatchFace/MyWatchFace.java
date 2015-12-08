@@ -227,15 +227,14 @@ public class MyWatchFace extends CanvasWatchFaceService {
             float centerX = bounds.width() / 2f;
             float centerY = bounds.height() / 2f;
 
-            float r0 = centerX - 20;
-            float r1 = centerX;
+            float r0 = centerX - 40;
+            float r1 = centerX - 10;
+
 
             for (int i = 0; i<60; i++) {
 
-                double angle = (i * Math.PI * 2 / 60)  - 0.01;
-                double sinVal = Math.sin(angle);
-                double cosVal = Math.cos(angle);
                 float len = r0;
+
                 if (i%15 == 0 ) {
                     mKeduPaint.setStrokeWidth(10);
                 }
@@ -246,25 +245,37 @@ public class MyWatchFace extends CanvasWatchFaceService {
                 else {
                     len = r0 + 15;
                     mKeduPaint.setStrokeWidth(2);
+
+                    if (isInAmbientMode()) {
+                        continue;
+                    }
+
                 }
+
+                double angle = (i * Math.PI * 2 / 60);
+                double sinVal = Math.sin(angle);
+                double cosVal = Math.cos(angle);
+
+
+
                 float x1 = (float)(sinVal * len);
                 float y1 = (float)(-cosVal * len);
                 float x2 = (float)(sinVal * r1);
                 float y2 = (float)(-cosVal * r1);
 
-                if (i != 15) {
+//                if (i != 15) {
                     canvas.drawLine(centerX + x1, centerY + y1, centerX + x2,
                             centerY + y2, mKeduPaint);
-                }
+//                }
 
             }
 
 
             String wd[] = {"日","一","二","三","四","五","六"};
 
-            String str = ""+mTime.month+"."+mTime.monthDay+" 星期"+wd[mTime.weekDay];
+            String str = ""+mTime.monthDay+" "+wd[mTime.weekDay];
             float strPixel = mTextPaint.measureText(str);
-            canvas.drawText(str, bounds.width() - strPixel - 2, centerY + 5, mTextPaint);
+            canvas.drawText(str, bounds.width() - strPixel - 45, centerY + 5, mTextPaint);
 
             float secRot = mTime.second / 30f * (float) Math.PI;
             int minutes = mTime.minute;
