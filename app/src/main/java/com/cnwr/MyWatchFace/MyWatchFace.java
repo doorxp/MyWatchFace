@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.doorxp.myapplication;
+package com.cnwr.MyWatchFace;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -33,6 +33,8 @@ import android.support.wearable.watchface.WatchFaceStyle;
 import android.text.TextPaint;
 import android.text.format.Time;
 import android.view.SurfaceHolder;
+
+import com.example.doorxp.myapplication.R;
 
 import java.lang.ref.WeakReference;
 import java.util.TimeZone;
@@ -87,6 +89,8 @@ public class MyWatchFace extends CanvasWatchFaceService {
         Paint mHandPaint;
         TextPaint mTextPaint;
 
+        Resources resources;
+
         boolean mAmbient;
         Time mTime;
         final BroadcastReceiver mTimeZoneReceiver = new BroadcastReceiver() {
@@ -115,7 +119,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
                     .setAcceptsTapEvents(true)
                     .build());
 
-            Resources resources = MyWatchFace.this.getResources();
+            resources = MyWatchFace.this.getResources();
 
             mBackgroundPaint = new Paint();
             mBackgroundPaint.setColor(resources.getColor(R.color.background));
@@ -211,8 +215,10 @@ public class MyWatchFace extends CanvasWatchFaceService {
             // Draw the background.
             if (isInAmbientMode()) {
                 canvas.drawColor(Color.BLACK);
+                mKeduPaint.setColor(resources.getColor(R.color.analog_hands));
             } else {
                 canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), mBackgroundPaint);
+                mKeduPaint.setColor(Color.WHITE);
             }
 
             // Find the center. Ignore the window insets so that, on round watches with a
