@@ -200,9 +200,9 @@ public class MyWatchFace extends CanvasWatchFaceService {
                     break;
                 case TAP_TYPE_TAP:
                     // The user has completed the tap gesture.
-                    mTapCount++;
-                    mBackgroundPaint.setColor(resources.getColor(mTapCount % 2 == 0 ?
-                            R.color.background : R.color.background2));
+//                    mTapCount++;
+//                    mBackgroundPaint.setColor(resources.getColor(mTapCount % 2 == 0 ?
+//                            R.color.background : R.color.background2));
                     break;
             }
             invalidate();
@@ -271,7 +271,7 @@ public class MyWatchFace extends CanvasWatchFaceService {
             }
 
 
-            String wd[] = {"日","一","二","三","四","五","六"};
+            String wd[] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
 
             String str = ""+mTime.monthDay+" "+wd[mTime.weekDay];
             float strPixel = mTextPaint.measureText(str);
